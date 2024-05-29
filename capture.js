@@ -24,7 +24,7 @@ async function DevChatCheking() {
     if (cursor == '') {
       // İlk sonuçları al
       const resultsOut = await results({
-        process: 'YOUR_DEVCHAT_PROCESS_ID',
+        process: 'cSh3iRyE3_qGdRzczwkZxG7bHfFC3Kq7xhO4toPbp9k',
         sort: 'DESC',
         limit: 1,
       });
@@ -34,7 +34,7 @@ async function DevChatCheking() {
 
     // DevChat'ten gelen sonuçları kontrol et
     const resultsOut2 = await results({
-      process: 'YOUR_DEVCHAT_PROCESS_ID',
+      process: 'cSh3iRyE3_qGdRzczwkZxG7bHfFC3Kq7xhO4toPbp9k',
       from: cursor,
       sort: 'ASC',
       limit: 50,
