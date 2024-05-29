@@ -1,11 +1,31 @@
-RoomManager = {}
+DevChat = {}
 
-RoomManager.Rooms = RoomManager.Rooms or {}
+DevChat.Colors = {
+    red = "\27[31m",
+    green = "\27[32m",
+    blue = "\27[34m",
+    reset = "\27[0m",
+    gray = "\27[90m"
+}
 
--- Oda adına göre oda adresini bulan fonksiyon
-RoomManager.findRoom =
+DevChat.Router = "xnkv_QpWqICyt8NpVMbfsUQciZ4wlm5DigLrfXRm8fY" 
+DevChat.InitRoom = "1245365878657388660" 
+DevChat.LastSend = DevChat.InitRoom
+
+DevChat.LastReceive = {
+    Room = DevChat.InitRoom,
+    Sender = nil
+}
+
+DevChat.InitRooms = { [DevChat.InitRoom] = "DevChat-Main" }
+DevChat.Rooms = DevChat.Rooms or DevChat.InitRooms
+
+DevChat.Confirmations = DevChat.Confirmations or true
+
+-- Hedef oda adına göre oda adresini bulan fonksiyon
+DevChat.findRoom =
     function(target)
-        for address, name in pairs(RoomManager.Rooms) do
+        for address, name in pairs(DevChat.Rooms) do
             if target == name then
                 return address
             end
@@ -13,7 +33,7 @@ RoomManager.findRoom =
     end
 
 -- Yeni bir oda eklemek için fonksiyon
-RoomManager.add =
+DevChat.add =
     function(...)
         local arg = {...}
         ao.send({
@@ -24,11 +44,18 @@ RoomManager.add =
         })
     end
 
+-- Tüm odaların listesini alma fonksiyonu
+List =
+    function()
+        ao.send({ Target = DevChat.Router, Action = "Get-List" })
+        return(DevChat.Colors.gray .. "DevChat dizininden oda listesi alınıyor..." .. DevChat.Colors.reset)
+    end
+
 -- Bir odaya katılma fonksiyonu
 Join =
     function(id, ...)
         local arg = {...}
-        local addr = RoomManager.findRoom(id) or id
+        local addr = DevChat.findRoom(id) or id
         local nick = arg[1] or ao.id
         ao.send({ Target = addr, Action = "Register", Nickname = nick })
         return(
@@ -44,9 +71,9 @@ Say =
         local arg = {...}
         local id = arg[1]
         if id ~= nil then
-            DevChat.LastSend = RoomManager.findRoom(id) or id
+            DevChat.LastSend = DevChat.findRoom(id) or id
         end
-        local name = RoomManager.Rooms[DevChat.LastSend] or id
+        local name = DevChat.Rooms[DevChat.LastSend] or id
         ao.send({ Target = DevChat.LastSend, Action = "Say", Data = text })
         if DevChat.Confirmations then
             return(DevChat.Colors.gray .. "Yayıncıya " .. DevChat.Colors.blue ..
@@ -61,7 +88,7 @@ Tip =
     function(...) -- Alıcı, Hedef, Miktar
         local arg = {...}
         local room = arg[2] or DevChat.LastReceive.Room
-        local roomName = RoomManager.Rooms[room] or room
+        local roomName = DevChat.Rooms[room] or room
         local qty = tostring(arg[3] or 1)
         local recipient = arg[1] or DevChat.LastReceive.Sender
         ao.send({
@@ -73,8 +100,7 @@ Tip =
         return(DevChat.Colors.gray .. "Bahşiş gönderiliyor: " ..
             DevChat.Colors.green .. qty .. DevChat.Colors.gray ..
             " alıcıya " .. DevChat.Colors.red .. recipient .. DevChat.Colors.gray ..
-            " odada " .. DevChat.Colors.blue .. roomName .. DevChat.Colors.gray ..
-            "."
+            " odada " .. DevChat.Colors.blue .. roomName .. DevChat.Colors.gray .. "."
         )
     end
 
@@ -83,7 +109,7 @@ Handlers.add(
     "DevChat-Broadcasted",
     Handlers.utils.hasMatchingTag("Action", "Broadcasted"),
     function (m)
-        local shortRoom = RoomManager.Rooms[m.From] or string.sub(m.From, 1, 6)
+        local shortRoom = DevChat.Rooms[m.From] or string.sub(m.From, 1, 6)
         if m.Broadcaster == ao.id then
             if DevChat.Confirmations == true then
                 print(
@@ -119,7 +145,7 @@ Handlers.add(
     function(m)
         local intro = "?? Aşağıdaki odalar şu anda DevChat'te mevcut:\n\n"
         local rows = ""
-        RoomManager.Rooms = DevChat.InitRooms
+        DevChat.Rooms = DevChat.InitRooms
 
         for i = 1, #m.TagArray do
             local filterPrefix = "Room-" -- Tüm oda etiketleri bu önekiyle başlar
@@ -129,7 +155,7 @@ Handlers.add(
 
             if tagPrefix == filterPrefix then
                 rows = rows .. DevChat.Colors.blue .. "        " .. name .. DevChat.Colors.reset .. "\n"
-                RoomManager.Rooms[address] = name
+                DevChat.Rooms[address] = name
             end
         end
 
@@ -138,26 +164,21 @@ Handlers.add(
     end
 )
 
--- Yeni bir oda eklemek için
-RoomManager.add("abdullahdevchat")
+-- DevChat'a yeni bir katılımcının eklendiğini işleyen fonksiyon
+Handlers.add(
+    "TransferToDevChat",
+    Handlers.utils.hasMatchingTag("Action", "TransferToDevChat"),
+    function(m)
+        local msgContent = m.Data or "Mesaj içeriği bulunamadı"
+        local senderName = m.Event or "Bilinmeyen gönderen"
 
--- abdullahdevchat'a katıl
-Join("abdullahdevchat")
-
--- abdullahdevchat'da hoş geldiniz mesajı
-print(
-    DevChat.Colors.blue .. "\n\nabdullahdevchat odasına hoş geldiniz!\n\n" .. DevChat.Colors.reset ..
-    "Bu oda, sporun heyecanını ve stratejisini tartışmak için oluşturulmuştur.\n" ..
-    "Bir oyun, bir maç veya bir takım hakkında konuşmak için mükemmel bir yerdir.\n" ..
-    "Dürüstlük ve saygıyı ön planda tutun ve eğlenceli vakit geçirin!"
+        -- Mesajı DevChat konsolunda göster
+        print(DevChat.Colors.green .. "[" .. senderName .. "]: " .. DevChat.Colors.reset .. msgContent)
+    end
 )
 
--- DevChat'a kaydolun
-ao.send({
-    Target = DevChat.Router,
-    Action = "Register",
-    Name = "AbdullahDiscordDevchat"
-})
-
--- Mesajları dinleme döngüsü
-DevChat.listen()
+-- Eğer daha önce DevChat'a kaydolunmadıysa, ilk odaya katıl
+if DevChatRegistered == nil then
+    DevChatRegistered = true
+    Join(DevChat.InitRoom)
+end
