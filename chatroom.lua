@@ -141,12 +141,12 @@ Handlers.add(
 -- Yeni bir oda eklemek için
 RoomManager.add("abdullahdevchat")
 
--- CoinssporRoom'a katıl
+-- abdullahdevchat'a katıl
 Join("abdullahdevchat")
 
--- CoinssporRoom'da hoş geldiniz mesajı
+-- abdullahdevchat'da hoş geldiniz mesajı
 print(
-    DevChat.Colors.blue .. "\n\nCoinssporRoom odasına hoş geldiniz!\n\n" .. DevChat.Colors.reset ..
+    DevChat.Colors.blue .. "\n\nabdullahdevchat odasına hoş geldiniz!\n\n" .. DevChat.Colors.reset ..
     "Bu oda, sporun heyecanını ve stratejisini tartışmak için oluşturulmuştur.\n" ..
     "Bir oyun, bir maç veya bir takım hakkında konuşmak için mükemmel bir yerdir.\n" ..
     "Dürüstlük ve saygıyı ön planda tutun ve eğlenceli vakit geçirin!"
