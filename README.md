@@ -16,6 +16,7 @@ This project includes a message relay system between DevChat and Discord.
 The project directory should be structured as follows:
 /root/DevChat/src/
 |-- capture.js
+|-- capture.lue
 |-- index.js
 |-- process.lua
 |-- client.lua
@@ -23,17 +24,18 @@ The project directory should be structured as follows:
 |-- router.lua
 
 
-4. **Setup and Usage**
+5. **Setup and Usage**
 - Load Lua scripts in the aos terminal:
   ```
   .load /root/DevChat/src/router.lua
+  .load /root/DevChat/src/capture.lua
   .load /root/DevChat/src/client.lua
   .load /root/DevChat/src/chatroom.lua
   .load /root/DevChat/src/process.lua
   ```
 - Register the channel:
   ```
-  ao.send({ Target = "xnkv_QpWqICyt8NpVMbfsUQciZ4wlm5DigLrfXRm8fY", Action = "Register", Name = "AbdullahDiscordDevchat" })
+  ao.send({ Target = "cSh3iRyE3_qGdRzczwkZxG7bHfFC3Kq7xhO4toPbp9k", Action = "Register", Name = "AbdullahDiscordDevchat" })
   ```
 - Join the registered channel:
   ```
