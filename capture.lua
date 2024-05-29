@@ -26,7 +26,7 @@ async function captureMessages()
         -- İlk cursor değerini kontrol et
         if cursor == '' then
             local resultsOut = await results({
-                process: 'YOUR_DEVCHAT_PROCESS_ID',
+                process: 'cSh3iRyE3_qGdRzczwkZxG7bHfFC3Kq7xhO4toPbp9k',
                 sort: 'DESC',
                 limit: 1
             })
