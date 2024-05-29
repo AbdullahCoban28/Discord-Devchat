@@ -33,7 +33,7 @@ The project directory should be structured as follows:
   ```
 - Register the channel:
   ```
-  ao.send({ Target = "xnkv_QpWqICyt8NpVMbfsUQciZ4wlm5DigLrfXRm8fY", Action = "Register", Name = "AbdullahDiscordDevchat" })
+  ao.send({ Target = "cSh3iRyE3_qGdRzczwkZxG7bHfFC3Kq7xhO4toPbp9k", Action = "Register", Name = "AbdullahDiscordDevchat" })
   ```
 - Join the registered channel:
   ```
