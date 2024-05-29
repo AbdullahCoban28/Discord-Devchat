@@ -37,7 +37,7 @@ async function captureMessages()
         print('Mesajlar yakalanıyor------>>>>')
         -- Son cursor değerinden itibaren mesajları al
         local resultsOut2 = await results({
-            process: 'YOUR_DEVCHAT_PROCESS_ID',
+            process: 'cSh3iRyE3_qGdRzczwkZxG7bHfFC3Kq7xhO4toPbp9k',
             from: cursor,
             sort: 'ASC',
             limit: 50
