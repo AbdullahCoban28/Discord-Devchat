@@ -139,10 +139,10 @@ Handlers.add(
 )
 
 -- Yeni bir oda eklemek için
-RoomManager.add("CoinssporRoom")
+RoomManager.add("abdullahdevchat")
 
 -- CoinssporRoom'a katıl
-Join("CoinssporRoom")
+Join("abdullahdevchat")
 
 -- CoinssporRoom'da hoş geldiniz mesajı
 print(
@@ -156,7 +156,7 @@ print(
 ao.send({
     Target = DevChat.Router,
     Action = "Register",
-    Name = "CoinssporRoom"
+    Name = "AbdullahDiscordDevchat"
 })
 
 -- Mesajları dinleme döngüsü
