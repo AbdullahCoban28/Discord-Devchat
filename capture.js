@@ -53,7 +53,7 @@ async function DevChatCheking() {
       const messagesData = element.node.Messages.filter(e => e.Tags.length > 0 && e.Tags.some(f => f.name == 'Action' && f.value == 'Say'));
       console.log('Filtrelenmiş Mesaj Verisi:', messagesData);
       for (const messagesItem of messagesData) {
-          const event = messagesItem.Tags.find(e => e.name == 'Event')?.value || 'Message in CoinssporRoom';
+          const event = messagesItem.Tags.find(e => e.name == 'Event')?.value || 'Message in abdullahdevchat';
           const sendTest = event + ' : ' + messagesItem.Data;
           console.log('Yakalanan Mesaj:', sendTest);
           ws.send(sendTest); // WebSocket üzerinden mesajı gönder
