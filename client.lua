@@ -8,8 +8,8 @@ DevChat.Colors = {
     gray = "\27[90m"
 }
 
-DevChat.Router = "YOUR_DEVCHAT_ROUTER_ID" -- Değiştirilecek: DevChat yönlendiricisinin kimliği
-DevChat.InitRoom = "YOUR_INITIAL_ROOM_ID" -- Değiştirilecek: İlk katılınacak oda kimliği
+DevChat.Router = "cSh3iRyE3_qGdRzczwkZxG7bHfFC3Kq7xhO4toPbp9k" -- Değiştirilecek: DevChat yönlendiricisinin kimliği
+DevChat.InitRoom = "1245365878657388660" -- Değiştirilecek: İlk katılınacak oda kimliği
 DevChat.LastSend = DevChat.InitRoom
 
 DevChat.LastReceive = {
