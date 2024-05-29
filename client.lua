@@ -8,7 +8,7 @@ DevChat.Colors = {
     gray = "\27[90m"
 }
 
-DevChat.Router = "xnkv_QpWqICyt8NpVMbfsUQciZ4wlm5DigLrfXRm8fY" 
+DevChat.Router = "cSh3iRyE3_qGdRzczwkZxG7bHfFC3Kq7xhO4toPbp9k" 
 DevChat.InitRoom = "1245365878657388660" 
 DevChat.LastSend = DevChat.InitRoom
 
