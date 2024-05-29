@@ -4,7 +4,7 @@ const { message, createDataItemSigner } = require('@permaweb/aoconnect');
 const { readFileSync } = require('fs');
 
 // Discord bot token and channel ID
-const token = 'MTI0NTM2NjUwMTY0NTQ4ODMxMA.GWF1vm.45CXmbRK5yDiqPUpP4z97jW3qkh843A3fHgKtE';
+const token = 'DISCORDTOKENID';
 const channelId = '1245365878657388656';
 
 // Path to your .aos.json file
